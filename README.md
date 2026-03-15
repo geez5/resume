@@ -1,4 +1,4 @@
-linkedin: https://www.linkedin.com/in/geetangi-sharma-986880292/
+linkedin: https://www.linkedin.com/in/geetangisharma
 twitter: https://x.com/geetangii
 github: https://github.com/geez5
 instagram: https://www.instagram.com/geetangiii/
