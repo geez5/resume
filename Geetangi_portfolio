@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geetangi Sharma — Portfolio Scrapbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fdf6e3;--warm:#f5edd6;
+  --ink:#2c1810;--inkb:#1a3a6e;--inkr:#8b1a1a;
+  --ty:rgba(255,230,100,.72);--tb:rgba(160,205,255,.72);
+  --tp:rgba(220,170,255,.72);--tg:rgba(160,230,185,.72);
+  --my:#ffe566;--mp:#ffb3c6;--mg:#b8f0c8;--mb:#b3d9ff;
+  --sh:rgba(60,30,10,.15);
+}
+body{
+  background:#c9bc9f;
+  background-image:radial-gradient(circle at 15% 60%,rgba(170,150,110,.3) 0%,transparent 55%),radial-gradient(circle at 85% 20%,rgba(190,170,130,.2) 0%,transparent 50%);
+  font-family:'Caveat',cursive;color:var(--ink);min-height:100vh;padding:24px 16px 60px;overflow-x:hidden;
+}
+
+/* ── COVER ── */
+.cover{
+  max-width:840px;margin:0 auto 52px;
+  background:#8b1a2a;
+  background-image:repeating-linear-gradient(0deg,transparent,transparent 29px,rgba(255,255,255,.04) 29px,rgba(255,255,255,.04) 30px),repeating-linear-gradient(90deg,transparent,transparent 29px,rgba(255,255,255,.04) 29px,rgba(255,255,255,.04) 30px);
+  border-radius:4px 14px 14px 4px;border-left:20px solid #5a0e1a;
+  padding:48px 60px 52px;
+  box-shadow:-8px 0 0 #6a1020,10px 8px 36px rgba(0,0,0,.45),inset 0 0 70px rgba(0,0,0,.2);
+  position:relative;animation:float 7s ease-in-out infinite;
+}
+.cover::before{content:'';position:absolute;left:-5px;top:30px;bottom:30px;width:3px;background:repeating-linear-gradient(to bottom,#c8a860 0,#c8a860 11px,transparent 11px,transparent 17px);}
+@keyframes float{0%,100%{transform:rotate(-.3deg) translateY(0)}50%{transform:rotate(.2deg) translateY(-6px)}}
+
+.c-avatar{width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,#ffe0a0,#ffb347);border:4px solid #f5dfa0;display:flex;align-items:center;justify-content:center;font-size:50px;position:absolute;top:40px;right:60px;box-shadow:3px 4px 14px rgba(0,0,0,.35);transform:rotate(4deg);transition:transform .3s;cursor:pointer;}
+.c-avatar:hover{transform:rotate(0) scale(1.1);}
+
+.c-title{font-family:'Special Elite',cursive;color:#f5dfa0;font-size:54px;line-height:1.05;text-shadow:2px 3px 0 rgba(0,0,0,.3);margin-bottom:6px;}
+.c-sub{font-family:'Caveat',cursive;color:#e8c870;font-size:26px;font-weight:600;margin-bottom:28px;}
+
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:30px;}
+.badge{background:var(--my);border-radius:40px;padding:5px 15px;font-size:15px;font-weight:700;color:var(--ink);border:2px solid rgba(0,0,0,.12);box-shadow:2px 2px 0 rgba(0,0,0,.15);display:inline-block;transition:transform .2s,box-shadow .2s;cursor:default;}
+.badge:hover{transform:scale(1.12) rotate(-3deg);box-shadow:3px 4px 0 rgba(0,0,0,.2);}
+.badge:nth-child(2n){background:var(--mp);transform:rotate(2deg);}
+.badge:nth-child(3n){background:var(--mg);transform:rotate(-1.5deg);}
+.badge:nth-child(4n){background:var(--mb);transform:rotate(3deg);}
+.badge:nth-child(5n){background:#e0d0ff;transform:rotate(-2deg);}
+
+.clinks{display:flex;flex-wrap:wrap;gap:10px;}
+.cl{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.13);border:1.5px solid rgba(245,223,160,.35);border-radius:8px;padding:8px 16px;font-family:'Patrick Hand',cursive;font-size:16px;color:#f5dfa0;text-decoration:none;transition:background .2s,transform .2s,color .2s;}
+.cl:hover{background:rgba(255,255,255,.26);transform:translateY(-2px);color:#fff;}
+.cl svg{width:18px;height:18px;fill:currentColor;flex-shrink:0;}
+
+/* ── BOARD ── */
+.board{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start;}
+
+/* ── PAPER ── */
+.paper{
+  background:var(--cream);
+  background-image:repeating-linear-gradient(transparent,transparent 27px,rgba(180,155,110,.2) 27px,rgba(180,155,110,.2) 28px);
+  border-radius:3px;padding:26px 26px 30px;
+  box-shadow:3px 5px 14px var(--sh),0 1px 3px rgba(0,0,0,.08);
+  position:relative;
+  opacity:0;transform:translateY(24px);
+  transition:opacity .55s,transform .55s,box-shadow .3s;
+}
+.paper.in{opacity:1;transform:translateY(0);}
+.paper:hover{box-shadow:5px 8px 22px var(--sh);}
+.paper.wide{grid-column:span 2;}
+.paper.warm{background:var(--warm);background-image:repeating-linear-gradient(transparent,transparent 27px,rgba(155,125,75,.17) 27px,rgba(155,125,75,.17) 28px);}
+.paper.wh{background:#fffef8;background-image:repeating-linear-gradient(transparent,transparent 27px,rgba(90,90,170,.1) 27px,rgba(90,90,170,.1) 28px);}
+
+/* tape */
+.tape{position:absolute;width:68px;height:24px;background:var(--ty);top:-12px;left:50%;transform:translateX(-50%) rotate(-2deg);pointer-events:none;border-radius:1px;}
+.tape.tl{left:22%;background:var(--tb);transform:rotate(-5deg);}
+.tape.tr{left:70%;background:var(--tp);transform:rotate(4deg);}
+.tape.tg{background:var(--tg);}
+
+/* pin */
+.pin{width:17px;height:17px;background:radial-gradient(circle at 40% 35%,#ff6b6b,#cc1a1a);border-radius:50% 50% 50% 0;position:absolute;transform:rotate(45deg);top:-8px;left:50%;box-shadow:1px 2px 5px rgba(0,0,0,.3);}
+.pin.b{background:radial-gradient(circle at 40% 35%,#6bb3ff,#1a50cc);}
+.pin.g{background:radial-gradient(circle at 40% 35%,#6bff8a,#1acc45);}
+
+/* staple */
+.staple{width:28px;height:8px;border:2.5px solid #aaa;border-top:none;border-radius:0 0 4px 4px;position:absolute;top:0;left:50%;transform:translateX(-50%);}
+
+/* section title */
+.stitle{font-family:'Special Elite',cursive;font-size:21px;color:var(--ink);margin-bottom:14px;border-bottom:2px solid rgba(44,24,16,.17);padding-bottom:5px;display:flex;align-items:center;gap:8px;}
+
+/* highlight */
+.hl{background:linear-gradient(120deg,transparent 0%,var(--my) 10%,var(--my) 90%,transparent 100%);padding:0 4px;border-radius:2px;}
+.hl.p{background:linear-gradient(120deg,transparent 0%,var(--mp) 10%,var(--mp) 90%,transparent 100%);}
+.hl.b{background:linear-gradient(120deg,transparent 0%,var(--mb) 10%,var(--mb) 90%,transparent 100%);}
+.hl.g{background:linear-gradient(120deg,transparent 0%,var(--mg) 10%,var(--mg) 90%,transparent 100%);}
+
+/* sticky */
+.sticky{background:#fffb8a;background-image:linear-gradient(to bottom,#fffb8a,#ffed40);padding:13px 15px;border-radius:0 0 0 8px;box-shadow:3px 4px 10px rgba(0,0,0,.14),inset 0 -2px 4px rgba(0,0,0,.07);font-family:'Caveat',cursive;font-size:15px;line-height:1.6;color:#2a2000;transform:rotate(2deg);position:relative;}
+.sticky::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:rgba(0,0,0,.07);}
+.sticky.bl{background:#c8e8ff;background-image:linear-gradient(to bottom,#c8e8ff,#a0d4ff);color:#002060;}
+.sticky.gn{background:#c8f0d8;background-image:linear-gradient(to bottom,#c8f0d8,#aadfbe);color:#003a18;}
+
+/* ── EXPERIENCE ── */
+.exp{margin-bottom:18px;padding:13px 15px;background:rgba(255,255,255,.6);border-left:4px solid var(--my);border-radius:0 5px 5px 0;transition:transform .2s;}
+.exp:hover{transform:translateX(4px);}
+.exp:nth-child(even){border-left-color:var(--mp);}
+.exp:last-child{margin-bottom:0;}
+.exp-role{font-size:19px;font-weight:700;margin-bottom:2px;}
+.exp-co{font-family:'Patrick Hand',cursive;font-size:14px;color:var(--inkb);font-weight:600;margin-bottom:7px;}
+.exp-ul{font-family:'Patrick Hand',cursive;font-size:13.5px;line-height:1.75;color:#3a2a20;list-style:none;}
+.exp-ul li::before{content:"→ ";color:var(--inkr);font-weight:700;}
+
+/* ── PROJECT CARDS ── */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.pcard{background:rgba(255,255,255,.58);border-radius:8px;padding:13px 14px;border:1.5px solid rgba(44,24,16,.1);cursor:pointer;transition:transform .25s,box-shadow .25s;position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block;}
+.pcard::after{content:'↗';position:absolute;top:10px;right:12px;font-size:16px;opacity:0;transition:opacity .2s;color:var(--inkb);font-family:'Patrick Hand',cursive;}
+.pcard:hover::after{opacity:1;}
+.pcard:hover{transform:translateY(-4px) rotate(.7deg);box-shadow:5px 7px 20px rgba(60,30,10,.2);}
+.pcard:active{transform:scale(.97);}
+.pname{font-size:18px;font-weight:700;margin-bottom:3px;}
+.ptype{font-family:'Patrick Hand',cursive;font-size:11px;background:var(--mb);color:var(--inkb);border-radius:20px;padding:2px 10px;display:inline-block;margin-bottom:7px;font-weight:600;}
+.pdesc{font-family:'Patrick Hand',cursive;font-size:13px;line-height:1.6;color:#3a2a20;}
+.ptag{font-size:11px;font-family:'Patrick Hand',cursive;background:rgba(44,24,16,.08);border-radius:3px;padding:1px 6px;display:inline-block;margin:3px 2px 0;}
+.plive{font-family:'Caveat',cursive;font-size:13px;color:var(--inkb);margin-top:7px;display:block;}
+
+/* ── SKILLS ── */
+.scat{margin-bottom:11px;}
+.scat-lbl{font-family:'Patrick Hand',cursive;font-size:12px;color:#5a4030;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px;}
+.sc{display:flex;flex-wrap:wrap;gap:6px;}
+.sp{font-family:'Patrick Hand',cursive;font-size:13px;font-weight:600;padding:4px 12px;border-radius:28px;border:1.5px solid rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;cursor:default;}
+.sp:hover{transform:scale(1.12) rotate(-2deg);box-shadow:2px 3px 8px rgba(0,0,0,.14);}
+.sp.a{background:#ffd166;color:#5a3e00;}
+.sp.b{background:#b3d9ff;color:#0a2a5a;}
+.sp.c{background:#b8f0c8;color:#0a3a1a;}
+.sp.d{background:#ffc0cb;color:#5a0a1a;}
+.sp.e{background:#e0d0ff;color:#3a0a6a;}
+
+/* ── ACHIEVEMENTS ── */
+.ach{display:flex;align-items:flex-start;gap:11px;margin-bottom:11px;padding:9px 12px;background:rgba(255,255,255,.55);border-radius:6px;border:1px solid rgba(44,24,16,.09);transition:transform .2s;}
+.ach:hover{transform:translateX(5px);}
+.ach-ico{font-size:24px;flex-shrink:0;}
+.ach-txt{font-family:'Patrick Hand',cursive;font-size:14px;line-height:1.5;}
+.ach-lbl{font-size:16px;font-weight:700;display:block;}
+
+/* ── RAG BARS ── */
+.rb{margin-bottom:10px;}
+.rb-hd{font-family:'Patrick Hand',cursive;font-size:12.5px;color:#3a2a20;display:flex;justify-content:space-between;margin-bottom:3px;}
+.rb-track{height:10px;background:rgba(44,24,16,.1);border-radius:10px;overflow:hidden;}
+.rb-fill{height:100%;border-radius:10px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* ── POLAROID ── */
+.polar-row{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.polar{background:#fff;padding:11px 11px 34px;box-shadow:3px 4px 14px rgba(0,0,0,.18);width:142px;text-align:center;transition:transform .25s,box-shadow .25s;cursor:pointer;position:relative;}
+.polar:nth-child(1){transform:rotate(-4deg);}
+.polar:nth-child(2){transform:rotate(3deg);}
+.polar:nth-child(3){transform:rotate(-2deg);}
+.polar:nth-child(4){transform:rotate(4.5deg);}
+.polar:hover{transform:rotate(0) scale(1.1)!important;box-shadow:5px 6px 22px rgba(0,0,0,.24);z-index:10;}
+.polar-img{width:120px;height:86px;display:flex;align-items:center;justify-content:center;font-size:42px;background:linear-gradient(135deg,#f0f0f0,#e0e0e0);border-radius:2px;margin-bottom:7px;}
+.polar-cap{font-family:'Caveat',cursive;font-size:13px;color:#333;line-height:1.3;}
+
+/* ── CONTACT ── */
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;}
+.cta{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.6);border-radius:8px;padding:13px 15px;border:1.5px solid rgba(44,24,16,.11);text-decoration:none;color:var(--ink);transition:transform .2s,box-shadow .2s,background .2s;}
+.cta:hover{transform:translateY(-4px);box-shadow:4px 6px 18px rgba(60,30,10,.2);background:rgba(255,255,255,.9);}
+.cta-ico{font-size:29px;flex-shrink:0;}
+.cta-lbl{font-family:'Patrick Hand',cursive;font-size:12px;color:#888;margin-bottom:1px;}
+.cta-val{font-size:16px;font-weight:700;}
+
+/* ── NAV ── */
+.nav{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:9px;z-index:200;}
+.nd{width:11px;height:11px;border-radius:50%;background:rgba(44,24,16,.26);border:none;cursor:pointer;padding:0;transition:background .2s,transform .2s;position:relative;}
+.nd:hover,.nd.on{background:#8b1a2a;transform:scale(1.45);}
+.nd .tip{position:absolute;right:18px;top:50%;transform:translateY(-50%);white-space:nowrap;font-family:'Caveat',cursive;font-size:12.5px;background:rgba(255,250,235,.93);padding:2px 8px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s;color:var(--ink);}
+.nd:hover .tip{opacity:1;}
+
+/* ── SCROLL TO TOP ── */
+#totop{position:fixed;bottom:22px;right:20px;width:40px;height:40px;background:#8b1a2a;color:#f5dfa0;border:none;border-radius:50%;font-size:20px;cursor:pointer;box-shadow:2px 3px 10px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:opacity .3s,transform .3s;z-index:300;}
+#totop.show{opacity:1;transform:scale(1);}
+#totop:hover{background:#6a0e1a;transform:scale(1.1)!important;}
+
+.footer{max-width:900px;margin:40px auto 10px;text-align:center;font-size:18px;color:rgba(44,24,16,.45);font-style:italic;}
+
+@keyframes pop{0%{opacity:1;transform:scale(.5) translateY(0) rotate(0)}70%{opacity:1;transform:scale(1.4) translateY(-50px) rotate(200deg)}100%{opacity:0;transform:scale(.6) translateY(-90px) rotate(380deg)}}
+
+@media(max-width:640px){
+  .board{grid-template-columns:1fr;}
+  .paper.wide{grid-column:span 1;}
+  .pgrid{grid-template-columns:1fr;}
+  .cta-grid{grid-template-columns:1fr;}
+  .c-title{font-size:38px;}
+  .c-avatar{width:78px;height:78px;font-size:34px;top:26px;right:18px;}
+  .cover{padding:38px 22px 42px;}
+  .nav{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════ COVER ════════════ -->
+<div class="cover" id="s0">
+  <div class="c-avatar" id="avBtn">🦋</div>
+  <div class="c-title">Geetangi<br>Sharma</div>
+  <div class="c-sub">AI/ML Engineer · Builder · Curious Mind ✦</div>
+  <div class="badges">
+    <span class="badge">🤖 AI/ML</span>
+    <span class="badge">🔍 RAG Systems</span>
+    <span class="badge">⚡ Full Stack</span>
+    <span class="badge">🎓 CS @ MUJ</span>
+    <span class="badge">💻 Python</span>
+    <span class="badge">🚀 Open to Roles</span>
+  </div>
+  <div class="clinks">
+    <a class="cl" href="mailto:sharmageetangi@gmail.com">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-8 5-8-5h16zm0 12H4V9.28l8 5 8-5V18z"/></svg>
+      Email Me
+    </a>
+    <a class="cl" href="https://www.linkedin.com/in/geetangi-sharma" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zM9 17H6.5v-7H9v7zm-1.25-8a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zM18 17h-2.5v-3.5c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5V17H10v-7h2.5v1.1A3.48 3.48 0 0115 9.5c1.93 0 3 1.57 3 3.5V17z"/></svg>
+      LinkedIn
+    </a>
+    <a class="cl" href="https://github.com/geetangi" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49v-1.71c-2.78.62-3.37-1.37-3.37-1.37-.45-1.17-1.11-1.48-1.11-1.48-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.57 2.34 1.12 2.91.86.09-.67.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.4 9.4 0 0112 7.4a9.4 9.4 0 012.5.35c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .27.18.59.69.49A10.28 10.28 0 0022 12.26C22 6.58 17.52 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a class="cl" href="tel:+917850899701">
+      <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      +91 78508 99701
+    </a>
+  </div>
+</div>
+
+<!-- ════════════ BOARD ════════════ -->
+<div class="board">
+
+  <!-- ABOUT -->
+  <div class="paper wh" id="s1">
+    <div class="tape tg"></div><div class="pin b" style="left:72%"></div>
+    <div class="stitle">👩‍💻 About Me</div>
+    <div style="display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;">
+      <div style="width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,#ffd6a5,#ffb347);border:3px solid white;box-shadow:2px 3px 8px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;font-size:38px;flex-shrink:0;">🦋</div>
+      <div style="font-family:'Patrick Hand',cursive;font-size:14.5px;line-height:1.7;color:#3a2a20;">CS undergrad at Manipal University Jaipur living in the space between <span class="hl">RAG pipelines</span> and <span class="hl p">production ML</span>. I like building things that actually work.</div>
+    </div>
+    <div style="font-family:'Caveat',cursive;font-size:15px;color:#5a4030;line-height:1.9;border-top:1px dashed rgba(44,24,16,.2);padding-top:10px;">
+      📌 Currently @ <strong>DoIT&C, Govt of Rajasthan</strong><br>
+      🌟 Into: GenAI · Computer Vision · SaaS Products
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="paper warm" id="s2">
+    <div class="tape tr"></div><div class="staple"></div>
+    <div class="stitle">📚 Education</div>
+    <div style="background:rgba(255,255,255,.6);border-radius:8px;padding:13px 15px;margin-bottom:12px;">
+      <div style="font-size:20px;font-weight:700;">B.Tech, CS&E</div>
+      <div style="font-family:'Patrick Hand',cursive;font-size:14px;color:var(--inkb);font-weight:600;margin-bottom:7px;">Manipal University Jaipur</div>
+      <div style="font-family:'Patrick Hand',cursive;font-size:13px;color:#3a2a20;line-height:1.65;">📖 Machine Learning · Data Science · AI<br>📖 DSA · OS · Computer Networks</div>
+    </div>
+    <div class="sticky gn" style="transform:rotate(-1.5deg);font-size:14px;">🎓 Turned coursework into real internships at Govt of Rajasthan & Proeffico!</div>
+  </div>
+
+  <!-- EXPERIENCE WIDE -->
+  <div class="paper wide wh" id="s3">
+    <div class="tape" style="left:22%"></div><div class="tape tl" style="left:72%"></div>
+    <div class="stitle">💼 Experience</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="exp">
+        <div class="exp-role">AI/ML Intern 🏛️</div>
+        <div class="exp-co">DoIT&C · Govt of Rajasthan · Jan–Jun 2026</div>
+        <ul class="exp-ul">
+          <li>Production RAG chatbot for citizen queries on govt portals</li>
+          <li>10-layer pipeline: Qwen-7B + Qwen-72B + hybrid Pinecone</li>
+          <li>BM25 + semantic + Cohere reranking → <span class="hl">&lt;3% hallucination</span></li>
+          <li>Under Shri Naveen Kumar (AD, DoIT&C)</li>
+        </ul>
+      </div>
+      <div class="exp">
+        <div class="exp-role">AI Software Dev Intern 🏢</div>
+        <div class="exp-co">Proeffico Solutions Pvt. Ltd. · Jun–Aug 2025</div>
+        <ul class="exp-ul">
+          <li>YOLOv8 CV pipelines → <span class="hl p">30% less latency</span></li>
+          <li>OCR on AWS Lambda + S3 → <span class="hl g">60% less manual work</span></li>
+          <li>Hybrid RAG (FAISS + BM25) for document Q&A</li>
+          <li>3 ML models via FastAPI + Docker on GCP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS WIDE -->
+  <div class="paper wide warm" id="s4">
+    <div class="tape tr" style="left:40%"></div><div class="pin" style="left:16%"></div>
+    <div class="stitle">🚀 Projects <span style="font-size:13px;font-family:'Patrick Hand',cursive;color:#888;margin-left:6px;">← click to open</span></div>
+    <div class="pgrid">
+
+      <a class="pcard" href="https://fourxclub.in" target="_blank" rel="noopener">
+        <div class="pname">FourXClub 🌐</div>
+        <div class="ptype">Full Stack · SaaS · Live ↗</div>
+        <div class="pdesc">Decoupled SaaS serving <strong>500+ users</strong>. 40% better load, 100+ Razorpay transactions, 90% fewer auth breaches. Discord + Bunny Stream + Resend integrated.</div>
+        <div><span class="ptag">Next.js 15</span><span class="ptag">PostgreSQL</span><span class="ptag">Prisma</span><span class="ptag">Razorpay</span><span class="ptag">Vercel</span></div>
+        <span class="plive">🔗 fourxclub.in ↗</span>
+      </a>
+
+      <a class="pcard" href="https://github.com/geetangi" target="_blank" rel="noopener">
+        <div class="pname">DocuMind 🧠</div>
+        <div class="ptype">GenAI · RAG · GitHub ↗</div>
+        <div class="pdesc">Dense FAISS + SentenceTransformers + sparse BM25 + cross-encoder reranking. <strong>95% answer relevance</strong>, sub-20ms latency, embedding caching.</div>
+        <div><span class="ptag">FAISS</span><span class="ptag">OpenAI API</span><span class="ptag">BM25</span><span class="ptag">Streamlit</span></div>
+        <span class="plive">💻 View on GitHub ↗</span>
+      </a>
+
+      <a class="pcard" href="https://github.com/geetangi" target="_blank" rel="noopener">
+        <div class="pname">Multi-Modal OCR + Detection 👁️</div>
+        <div class="ptype">Computer Vision · NLP</div>
+        <div class="pdesc">PaddleOCR + PyTesseract + GCloud Vision → <strong>92% accuracy</strong>. GPU YOLOv8 at <strong>30+ FPS</strong>, 89% detection via CUDA + PyTorch.</div>
+        <div><span class="ptag">YOLOv8</span><span class="ptag">CUDA</span><span class="ptag">PyTorch</span><span class="ptag">PaddleOCR</span></div>
+        <span class="plive">💻 View on GitHub ↗</span>
+      </a>
+
+      <a class="pcard" href="https://github.com/geetangi" target="_blank" rel="noopener">
+        <div class="pname">Fake News Detector 📰</div>
+        <div class="ptype">ML · NLP · Classification</div>
+        <div class="pdesc">TF-IDF + logistic regression on <strong>10,000+ articles</strong>. 94% accuracy. Surfaced domain-shift between satire and misinformation.</div>
+        <div><span class="ptag">Scikit-learn</span><span class="ptag">NLTK</span><span class="ptag">Pandas</span></div>
+        <span class="plive">💻 View on GitHub ↗</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="paper wh" id="s5">
+    <div class="tape tg"></div>
+    <div class="stitle">🛠️ Skills</div>
+    <div class="scat"><div class="scat-lbl">🤖 AI / ML</div><div class="sc"><span class="sp a">Python</span><span class="sp b">PyTorch</span><span class="sp b">TensorFlow</span><span class="sp b">HuggingFace</span><span class="sp b">BERT</span><span class="sp b">Scikit-learn</span></div></div>
+    <div class="scat"><div class="scat-lbl">🔍 NLP & Retrieval</div><div class="sc"><span class="sp b">RAG Systems</span><span class="sp b">FAISS</span><span class="sp b">Pinecone</span><span class="sp b">BM25</span><span class="sp b">Cohere Rerank</span><span class="sp b">Vector DBs</span></div></div>
+    <div class="scat"><div class="scat-lbl">👁️ Computer Vision</div><div class="sc"><span class="sp c">YOLOv8</span><span class="sp c">OpenCV</span><span class="sp c">CUDA</span><span class="sp c">PaddleOCR</span></div></div>
+    <div class="scat"><div class="scat-lbl">🌐 Full Stack</div><div class="sc"><span class="sp d">Next.js 15</span><span class="sp d">React 19</span><span class="sp d">Express.js</span><span class="sp d">PostgreSQL</span><span class="sp d">Prisma</span><span class="sp d">Tailwind</span><span class="sp a">TypeScript</span></div></div>
+    <div class="scat"><div class="scat-lbl">☁️ Infrastructure</div><div class="sc"><span class="sp e">Docker</span><span class="sp e">FastAPI</span><span class="sp e">GCP</span><span class="sp e">AWS Lambda</span><span class="sp e">Kubernetes</span><span class="sp e">Vercel</span><span class="sp e">n8n</span></div></div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="paper warm" id="s6">
+    <div class="tape tr" style="left:55%"></div><div class="pin g" style="left:22%"></div>
+    <div class="stitle">🏆 Achievements</div>
+    <div class="ach"><div class="ach-ico">🇮🇳</div><div class="ach-txt"><span class="ach-lbl">Smart India Hackathon 2024 & 2025</span>Applied ML to national problem statements — twice!</div></div>
+    <div class="ach"><div class="ach-ico">💡</div><div class="ach-txt"><span class="ach-lbl">NBC Idea Factory 2025</span>ML-powered solutions for real-world challenges</div></div>
+    <div class="ach"><div class="ach-ico">🎖️</div><div class="ach-txt"><span class="ach-lbl">IBM Certifications</span>Data Science Foundations · AI Fundamentals</div></div>
+    <div class="ach"><div class="ach-ico">🏛️</div><div class="ach-txt"><span class="ach-lbl">Govt of Rajasthan — DoIT&C</span>Production AI for millions of citizens</div></div>
+    <div class="sticky bl" style="margin-top:12px;transform:rotate(1deg);font-size:14px;">"Building AI that helps real people — that's the whole point." ✍️</div>
+  </div>
+
+  <!-- RAG DEEP DIVE WIDE -->
+  <div class="paper wide wh" id="s7">
+    <div class="tape tg" style="left:40%"></div>
+    <div class="stitle">🔬 RAG Pipeline Expertise <span style="font-size:13px;font-family:'Patrick Hand',cursive;color:#888;margin-left:6px;">my specialty!</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div>
+        <div style="font-family:'Patrick Hand',cursive;font-size:12px;color:#5a4030;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;">Measured outcomes</div>
+        <div class="rb"><div class="rb-hd"><span>Pinecone hybrid retrieval accuracy</span><span>~95%</span></div><div class="rb-track"><div class="rb-fill" data-w="95" style="background:linear-gradient(to right,#b8f0c8,#22c55e);"></div></div></div>
+        <div class="rb"><div class="rb-hd"><span>Hallucination reduction (10-layer)</span><span>&lt;3%</span></div><div class="rb-track"><div class="rb-fill" data-w="97" style="background:linear-gradient(to right,#ffd166,#f59e0b);"></div></div></div>
+        <div class="rb"><div class="rb-hd"><span>DocuMind answer relevance</span><span>95%</span></div><div class="rb-track"><div class="rb-fill" data-w="95" style="background:linear-gradient(to right,#b3d9ff,#3b82f6);"></div></div></div>
+        <div class="rb"><div class="rb-hd"><span>DocuMind query latency</span><span>&lt;20ms</span></div><div class="rb-track"><div class="rb-fill" data-w="90" style="background:linear-gradient(to right,#ffc0cb,#ec4899);"></div></div></div>
+        <div class="rb"><div class="rb-hd"><span>OCR pipeline accuracy</span><span>92%</span></div><div class="rb-track"><div class="rb-fill" data-w="92" style="background:linear-gradient(to right,#e0d0ff,#7c3aed);"></div></div></div>
+      </div>
+      <div>
+        <div style="font-family:'Patrick Hand',cursive;font-size:12px;color:#5a4030;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;">10-layer anti-hallucination pipeline</div>
+        <div style="font-family:'Patrick Hand',cursive;font-size:13px;line-height:1.95;color:#3a2a20;">
+          1. Query preprocessing & intent detection<br>
+          2. BM25 sparse retrieval<br>
+          3. Semantic dense retrieval (Pinecone)<br>
+          4. Hybrid score fusion<br>
+          5. Cohere cross-encoder reranking<br>
+          6. Context window assembly<br>
+          7. Qwen-7B grounding check<br>
+          8. Qwen-72B generation<br>
+          9. Factual consistency verification<br>
+          10. Confidence-gated response
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLAROIDS -->
+  <div class="paper wide" id="s8">
+    <div class="tape" style="left:44%"></div>
+    <div class="stitle">📸 A few things about me</div>
+    <div class="polar-row">
+      <div class="polar"><div class="polar-img">🤖</div><div class="polar-cap">Building AI for millions of citizens</div></div>
+      <div class="polar"><div class="polar-img">🌐</div><div class="polar-cap">Shipped fourxclub.in to 500+ users</div></div>
+      <div class="polar"><div class="polar-img">🏆</div><div class="polar-cap">Hackathon warrior (SIH ×2)</div></div>
+      
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="paper wide warm" id="s9">
+    <div class="tape tg" style="left:48%"></div>
+    <div class="stitle" style="justify-content:center;border:none;padding:0;margin-bottom:18px;">💌 Let's Connect!</div>
+    <div class="cta-grid">
+      <a class="cta" href="mailto:sharmageetangi@gmail.com">
+        <div class="cta-ico">📧</div><div><div class="cta-lbl">Email</div><div class="cta-val">sharmageetangi@gmail.com</div></div>
+      </a>
+      <a class="cta" href="https://www.linkedin.com/in/geetangi-sharma" target="_blank" rel="noopener">
+        <div class="cta-ico">💼</div><div><div class="cta-lbl">LinkedIn</div><div class="cta-val">linkedin.com/in/geetangi-sharma</div></div>
+      </a>
+      <a class="cta" href="https://github.com/geetangi" target="_blank" rel="noopener">
+        <div class="cta-ico">💻</div><div><div class="cta-lbl">GitHub</div><div class="cta-val">github.com/geetangi</div></div>
+      </a>
+      <a class="cta" href="tel:+917850899701">
+        <div class="cta-ico">📱</div><div><div class="cta-lbl">Phone</div><div class="cta-val">+91 7850899701</div></div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:20px;font-size:17px;color:#5a4030;">
+      Open to <span class="hl">full-time roles</span>, <span class="hl p">internships</span> &amp; <span class="hl g">collaborations</span>! ✨
+    </div>
+  </div>
+
+</div><!-- /board -->
+
+<div class="footer">✍️ Geetangi Sharma · 2026 · Made with 💙</div>
+
+<!-- NAV -->
+<div class="nav" id="nav">
+  <button class="nd on" data-s="s0"><span class="tip">Cover</span></button>
+  <button class="nd" data-s="s1"><span class="tip">About</span></button>
+  <button class="nd" data-s="s3"><span class="tip">Experience</span></button>
+  <button class="nd" data-s="s4"><span class="tip">Projects</span></button>
+  <button class="nd" data-s="s5"><span class="tip">Skills</span></button>
+  <button class="nd" data-s="s7"><span class="tip">RAG Expertise</span></button>
+  <button class="nd" data-s="s9"><span class="tip">Contact</span></button>
+</div>
+
+<button id="totop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+/* 1. Paper entrance */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.paper').forEach(p=>io.observe(p));
+
+/* 2. RAG bars */
+const ragIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.rb-fill').forEach(b=>{
+        b.style.width='0';setTimeout(()=>b.style.width=b.dataset.w+'%',100);
+      });
+      ragIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+const ragSec=document.getElementById('s7');
+if(ragSec)ragIO.observe(ragSec);
+
+/* 3. Nav dots */
+const secIds=['s0','s1','s3','s4','s5','s7','s9'];
+const dots=document.querySelectorAll('.nd');
+dots.forEach(d=>d.addEventListener('click',()=>{
+  const t=document.getElementById(d.dataset.s);
+  if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+}));
+window.addEventListener('scroll',()=>{
+  let cur=0;
+  secIds.forEach((id,i)=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<window.innerHeight*.55)cur=i;});
+  dots.forEach((d,i)=>d.classList.toggle('on',i===cur));
+},{passive:true});
+
+/* 4. Scroll to top */
+const tb=document.getElementById('totop');
+window.addEventListener('scroll',()=>tb.classList.toggle('show',scrollY>380),{passive:true});
+
+/* 5. Confetti burst */
+const emos=['✨','🎉','⚡','🚀','💡','🔥','🎊','🌟','💫'];
+function burst(cx,cy){
+  for(let i=0;i<10;i++){
+    const s=document.createElement('span');
+    s.textContent=emos[Math.floor(Math.random()*emos.length)];
+    const l=cx+(-60+Math.random()*120),t=cy+(-40+Math.random()*80);
+    s.style.cssText=`position:fixed;pointer-events:none;z-index:9999;left:${l}px;top:${t}px;font-size:${18+Math.random()*18}px;animation:pop .9s ease forwards;`;
+    document.body.appendChild(s);setTimeout(()=>s.remove(),950);
+  }
+}
+document.querySelectorAll('.pcard').forEach(c=>c.addEventListener('click',e=>{burst(e.clientX,e.clientY);}));
+document.querySelectorAll('.polar').forEach(p=>p.addEventListener('click',()=>{
+  const r=p.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);
+}));
+
+/* 6. Avatar easter egg */
+const avEmojis=['🦋','🌸','⭐','🚀','🧠','✨','🎯','💫','🦄','🌈'];
+let avI=0;
+document.getElementById('avBtn').addEventListener('click',function(){
+  avI=(avI+1)%avEmojis.length;this.textContent=avEmojis[avI];
+  const r=this.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2);
+});
+
+/* 7. Paper tilt */
+document.querySelectorAll('.paper').forEach(p=>{
+  p.addEventListener('mousemove',e=>{
+    const r=p.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    p.style.transform=`translateY(-4px) rotate(${x*3}deg)`;
+  });
+  p.addEventListener('mouseleave',()=>p.style.transform='');
+});
+
+/* 8. Badge hover wobble */
+document.querySelectorAll('.badge').forEach(b=>{
+  b.addEventListener('mouseenter',()=>{b.style.transition='transform .15s';b.style.transform='scale(1.12) rotate(-3deg)';});
+  b.addEventListener('mouseleave',()=>{b.style.transform='';});
+});
+</script>
+</body>
+</html>
