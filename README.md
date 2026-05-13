@@ -1,6 +1,6 @@
 linkedin: https://www.linkedin.com/in/geetangisharma
 twitter: https://x.com/geetangii
 github: https://github.com/geez5
-instagram: https://www.instagram.com/geetangiii/
+instagram: https://www.instagram.com/aigeetangi
 email id: sharmageetangi@gmail.com
 credly IBM: https://credly.com/users/geetangii 
