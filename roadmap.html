@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Science & AI Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a96e;
+    --gold-light: #e8d5b0;
+    --gold-dark: #8a6a3a;
+    --cream: #f7f3ec;
+    --ink: #0e0c0a;
+    --ink-soft: #2a2620;
+    --ink-muted: #6b6255;
+    --surface: #ffffff;
+    --surface-warm: #faf7f2;
+    --border: rgba(201,169,110,0.2);
+    --border-hover: rgba(201,169,110,0.6);
+    --ds-color: #c9a96e;
+    --ml-color: #8b9e7a;
+    --cv-color: #7a8fb0;
+    --gen-color: #b07a8f;
+
+    /* Track colors */
+    --track-ds: #c9a96e;
+    --track-ml: #7a9e6e;
+    --track-cv: #6e8fb0;
+    --track-gen: #b06e8f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 80px 40px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.1s;
+  }
+
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(42px, 6vw, 80px);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .header-sub {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--ink-muted);
+    color: #8a7d6e;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .header-line {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto 0;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  /* ── TRACK FILTER TABS ── */
+  .track-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,12,10,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+  }
+
+  .track-btn {
+    background: none;
+    border: none;
+    color: #6b6255;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 18px 28px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .track-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  .track-btn:hover { color: var(--cream); }
+  .track-btn.active { color: var(--cream); }
+  .track-btn.active::after { transform: scaleX(1); }
+
+  .track-btn[data-track="all"].active { color: var(--gold); }
+  .track-btn[data-track="ds"].active { color: var(--track-ds); }
+  .track-btn[data-track="ml"].active { color: var(--track-ml); }
+  .track-btn[data-track="cv"].active { color: var(--track-cv); }
+  .track-btn[data-track="gen"].active { color: var(--track-gen); }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* ── PHASE ── */
+  .phase {
+    margin-bottom: 80px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .phase.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 36px;
+  }
+
+  .phase-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 1;
+    color: rgba(201,169,110,0.12);
+    letter-spacing: -0.03em;
+    min-width: 70px;
+  }
+
+  .phase-title-wrap {}
+
+  .phase-label {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .phase-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    letter-spacing: 0.01em;
+  }
+
+  /* ── NODE GRID ── */
+  .node-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    padding-left: 90px;
+  }
+
+  /* ── NODE CARD ── */
+  .node {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 24px 24px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    opacity: 1;
+  }
+
+  .node::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 0;
+    transition: height 0.3s ease;
+  }
+
+  .node[data-track="ds"]::before { background: var(--track-ds); }
+  .node[data-track="ml"]::before { background: var(--track-ml); }
+  .node[data-track="cv"]::before { background: var(--track-cv); }
+  .node[data-track="gen"]::before { background: var(--track-gen); }
+
+  .node:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+  }
+
+  .node:hover::before { height: 100%; }
+
+  .node.dimmed {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+
+  .node-track-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    margin-bottom: 14px;
+  }
+
+  .node[data-track="ds"] .node-track-dot { background: var(--track-ds); }
+  .node[data-track="ml"] .node-track-dot { background: var(--track-ml); }
+  .node[data-track="cv"] .node-track-dot { background: var(--track-cv); }
+  .node[data-track="gen"] .node-track-dot { background: var(--track-gen); }
+
+  .node-title {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+
+  .node-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: #6b6255;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .node-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .tag {
+    font-size: 9px;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 1px;
+    border: 1px solid;
+    color: #8a7d6e;
+    border-color: rgba(138,125,110,0.3);
+  }
+
+  .node-project {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-decoration: none;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+    transition: opacity 0.2s;
+  }
+
+  .node-project:hover { opacity: 0.7; }
+
+  .node-project svg {
+    width: 10px;
+    height: 10px;
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+
+  /* ── CONNECTOR LINE ── */
+  .phase-connector {
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
+    margin: -56px 0 16px;
+    height: 80px;
+    pointer-events: none;
+  }
+
+  .connector-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.25), transparent);
+    margin-left: 20px;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 200;
+    background: rgba(14,12,10,0.92);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+    border-radius: 2px;
+  }
+
+  .legend-title {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6b6255;
+    margin-bottom: 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 300;
+    color: #a09080;
+  }
+
+  .legend-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,8,6,0.88);
+    backdrop-filter: blur(16px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--ink-soft);
+    border: 1px solid var(--border-hover);
+    border-radius: 2px;
+    padding: 48px;
+    max-width: 540px;
+    width: 100%;
+    position: relative;
+    transform: translateY(20px) scale(0.98);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.open .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-track-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .modal-phase {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: #6b6255;
+    margin-bottom: 24px;
+  }
+
+  .modal-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+  }
+
+  .modal-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: #c0b5a8;
+    margin-bottom: 24px;
+  }
+
+  .modal-skills-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6b6255;
+    margin-bottom: 12px;
+  }
+
+  .modal-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .modal-tag {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    padding: 5px 12px;
+    border: 1px solid var(--border-hover);
+    color: var(--cream);
+    border-radius: 1px;
+  }
+
+  .modal-project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 14px 20px;
+    border: 1px solid rgba(201,169,110,0.4);
+    transition: all 0.25s ease;
+  }
+
+  .modal-project-link:hover {
+    background: rgba(201,169,110,0.08);
+    border-color: var(--gold);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: 1px solid var(--border);
+    color: #6b6255;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    border-radius: 1px;
+  }
+
+  .modal-close:hover { color: var(--cream); border-color: var(--border-hover); }
+
+  /* ── SCROLL PROGRESS ── */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(to right, var(--track-ds), var(--track-ml), var(--track-cv), var(--track-gen));
+    z-index: 999;
+    transition: width 0.1s linear;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    header { padding: 50px 24px 40px; }
+    main { padding: 40px 20px 80px; }
+    .node-grid { padding-left: 0; grid-template-columns: 1fr; }
+    .phase-connector { padding-left: 0; }
+    .phase-num { font-size: 48px; min-width: 48px; }
+    .legend { display: none; }
+    .track-btn { padding: 14px 14px; font-size: 10px; letter-spacing: 0.15em; }
+    .modal { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-eyebrow">A Complete Learning Roadmap</div>
+  <h1>Data Science<br><em>&amp; Artificial Intelligence</em></h1>
+  <p class="header-sub">Machine Learning · Generative AI · Computer Vision</p>
+  <div class="header-line"></div>
+</header>
+
+<!-- TRACK NAV -->
+<nav class="track-nav">
+  <button class="track-btn active" data-track="all">All Tracks</button>
+  <button class="track-btn" data-track="ds">Data Science</button>
+  <button class="track-btn" data-track="ml">Machine Learning</button>
+  <button class="track-btn" data-track="gen">Generative AI</button>
+  <button class="track-btn" data-track="cv">Computer Vision</button>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main id="roadmapMain">
+  <!-- Will be rendered by JS -->
+</main>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-title">Tracks</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--track-ds)"></div>Data Science</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--track-ml)"></div>Machine Learning</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--track-gen)"></div>Generative AI</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--track-cv)"></div>Computer Vision</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-track-label" id="modalTrack"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-phase" id="modalPhase"></div>
+    <div class="modal-divider"></div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-skills-label">Key Topics</div>
+    <div class="modal-tags" id="modalTags"></div>
+    <a class="modal-project-link" id="modalProject" href="#" target="_blank">
+      <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+      View Project on GitHub ↗
+    </a>
+  </div>
+</div>
+
+<script>
+const GITHUB = 'https://github.com/geez5';
+
+const trackColors = {
+  ds: '#c9a96e',
+  ml: '#7a9e6e',
+  cv: '#6e8fb0',
+  gen: '#b06e8f'
+};
+
+const trackLabels = {
+  ds: 'Data Science',
+  ml: 'Machine Learning',
+  cv: 'Computer Vision',
+  gen: 'Generative AI'
+};
+
+const roadmap = [
+  {
+    phase: 1,
+    label: 'Foundation',
+    title: 'Mathematics & Programming',
+    nodes: [
+      {
+        id: 'python',
+        track: 'ds',
+        title: 'Python for Data Science',
+        desc: 'Core Python programming with NumPy, Pandas, and Matplotlib for data manipulation and visualization.',
+        tags: ['Python', 'NumPy', 'Pandas', 'Matplotlib'],
+        project: 'data-science-foundations',
+        projectLabel: 'EDA & Visualization Notebook'
+      },
+      {
+        id: 'stats',
+        track: 'ds',
+        title: 'Statistics & Probability',
+        desc: 'Descriptive and inferential statistics, probability distributions, hypothesis testing, and A/B testing.',
+        tags: ['Statistics', 'Probability', 'Scipy', 'Hypothesis Testing'],
+        project: 'statistical-analysis',
+        projectLabel: 'Statistical Analysis Projects'
+      },
+      {
+        id: 'linear-algebra',
+        track: 'ml',
+        title: 'Linear Algebra & Calculus',
+        desc: 'Vectors, matrices, eigenvalues, gradients, and chain rule — the mathematical backbone of ML models.',
+        tags: ['Linear Algebra', 'Calculus', 'Gradient Descent', 'Optimization'],
+        project: 'math-for-ml',
+        projectLabel: 'Math for ML Notebooks'
+      },
+      {
+        id: 'sql',
+        track: 'ds',
+        title: 'SQL & Databases',
+        desc: 'Querying relational databases, aggregations, joins, and window functions for real-world data analysis.',
+        tags: ['SQL', 'PostgreSQL', 'Window Functions', 'ETL'],
+        project: 'sql-projects',
+        projectLabel: 'SQL Analysis Projects'
+      }
+    ]
+  },
+  {
+    phase: 2,
+    label: 'Core Skills',
+    title: 'Data Science & Classical ML',
+    nodes: [
+      {
+        id: 'eda',
+        track: 'ds',
+        title: 'Exploratory Data Analysis',
+        desc: 'Data cleaning, feature engineering, outlier detection, correlation analysis, and storytelling with data.',
+        tags: ['EDA', 'Seaborn', 'Plotly', 'Feature Engineering'],
+        project: 'eda-projects',
+        projectLabel: 'EDA Case Studies'
+      },
+      {
+        id: 'supervised',
+        track: 'ml',
+        title: 'Supervised Learning',
+        desc: 'Regression, classification, decision trees, ensemble methods — trained and evaluated on real datasets.',
+        tags: ['Scikit-learn', 'Random Forest', 'XGBoost', 'Cross-Validation'],
+        project: 'supervised-ml',
+        projectLabel: 'Supervised ML Projects'
+      },
+      {
+        id: 'unsupervised',
+        track: 'ml',
+        title: 'Unsupervised Learning',
+        desc: 'Clustering with K-Means, DBSCAN, PCA for dimensionality reduction, and anomaly detection.',
+        tags: ['K-Means', 'DBSCAN', 'PCA', 't-SNE'],
+        project: 'unsupervised-ml',
+        projectLabel: 'Clustering & Dimensionality'
+      },
+      {
+        id: 'mlops-basic',
+        track: 'ml',
+        title: 'Model Evaluation & Tuning',
+        desc: 'Hyperparameter optimization, bias-variance tradeoff, learning curves, and model interpretability.',
+        tags: ['GridSearch', 'Optuna', 'SHAP', 'MLflow'],
+        project: 'model-evaluation',
+        projectLabel: 'Model Evaluation Pipeline'
+      }
+    ]
+  },
+  {
+    phase: 3,
+    label: 'Deep Learning',
+    title: 'Neural Networks & Architectures',
+    nodes: [
+      {
+        id: 'dl-basics',
+        track: 'ml',
+        title: 'Neural Network Fundamentals',
+        desc: 'Perceptrons, backpropagation, activation functions, and training deep networks with PyTorch & TensorFlow.',
+        tags: ['PyTorch', 'TensorFlow', 'Backprop', 'Activation Functions'],
+        project: 'deep-learning-fundamentals',
+        projectLabel: 'Deep Learning from Scratch'
+      },
+      {
+        id: 'cnn',
+        track: 'cv',
+        title: 'Convolutional Neural Networks',
+        desc: 'Image feature extraction with CNNs, VGG, ResNet architectures and transfer learning pipelines.',
+        tags: ['CNN', 'ResNet', 'VGG', 'Transfer Learning'],
+        project: 'cnn-projects',
+        projectLabel: 'CNN Image Classification'
+      },
+      {
+        id: 'rnn',
+        track: 'ml',
+        title: 'RNNs & Sequential Models',
+        desc: 'Sequence modeling with LSTMs, GRUs, and attention mechanisms for NLP and time series tasks.',
+        tags: ['LSTM', 'GRU', 'Attention', 'Time Series'],
+        project: 'sequential-models',
+        projectLabel: 'Sequence Modeling Projects'
+      },
+      {
+        id: 'transformers',
+        track: 'gen',
+        title: 'Transformer Architecture',
+        desc: 'Self-attention, multi-head attention, positional encoding, and the full Transformer from "Attention Is All You Need".',
+        tags: ['Self-Attention', 'BERT', 'Hugging Face', 'Tokenization'],
+        project: 'transformer-implementation',
+        projectLabel: 'Transformer from Scratch'
+      }
+    ]
+  },
+  {
+    phase: 4,
+    label: 'Specializations',
+    title: 'Computer Vision',
+    nodes: [
+      {
+        id: 'object-detection',
+        track: 'cv',
+        title: 'Object Detection',
+        desc: 'Real-time detection with YOLO, Faster R-CNN and SSD. Bounding box regression and anchor-free methods.',
+        tags: ['YOLOv8', 'Faster R-CNN', 'SSD', 'NMS'],
+        project: 'object-detection',
+        projectLabel: 'Object Detection Projects'
+      },
+      {
+        id: 'segmentation',
+        track: 'cv',
+        title: 'Image Segmentation',
+        desc: 'Semantic and instance segmentation with U-Net, Mask R-CNN, and SAM for pixel-level understanding.',
+        tags: ['U-Net', 'Mask R-CNN', 'SAM', 'Panoptic'],
+        project: 'image-segmentation',
+        projectLabel: 'Segmentation Projects'
+      },
+      {
+        id: 'pose-depth',
+        track: 'cv',
+        title: 'Pose & Depth Estimation',
+        desc: 'Human pose keypoint detection with MediaPipe and monocular depth estimation using DPT/MiDaS.',
+        tags: ['MediaPipe', 'OpenPose', 'MiDaS', 'Depth Estimation'],
+        project: 'pose-estimation',
+        projectLabel: 'Pose Estimation Pipeline'
+      },
+      {
+        id: 'vision-transformers',
+        track: 'cv',
+        title: 'Vision Transformers (ViT)',
+        desc: 'Attention-based vision models — ViT, Swin Transformer, and CLIP for multimodal image-text tasks.',
+        tags: ['ViT', 'Swin', 'CLIP', 'Multimodal'],
+        project: 'vision-transformers',
+        projectLabel: 'ViT & CLIP Projects'
+      }
+    ]
+  },
+  {
+    phase: 5,
+    label: 'Specializations',
+    title: 'Generative AI & LLMs',
+    nodes: [
+      {
+        id: 'llm-fundamentals',
+        track: 'gen',
+        title: 'Large Language Models',
+        desc: 'Pretraining, fine-tuning, RLHF, and prompting strategies. Working with GPT, LLaMA, and Mistral models.',
+        tags: ['GPT', 'LLaMA', 'Fine-tuning', 'RLHF'],
+        project: 'llm-projects',
+        projectLabel: 'LLM Fine-tuning Projects'
+      },
+      {
+        id: 'rag',
+        track: 'gen',
+        title: 'RAG & Vector Databases',
+        desc: 'Retrieval-Augmented Generation pipelines, embeddings, FAISS/Chroma vector stores, and semantic search.',
+        tags: ['LangChain', 'FAISS', 'ChromaDB', 'Embeddings'],
+        project: 'rag-pipeline',
+        projectLabel: 'RAG Pipeline Project'
+      },
+      {
+        id: 'diffusion',
+        track: 'gen',
+        title: 'Diffusion Models',
+        desc: 'Image generation with Stable Diffusion, DALL·E, and ControlNet. Training denoising diffusion models from scratch.',
+        tags: ['Stable Diffusion', 'DDPM', 'ControlNet', 'Latent Diffusion'],
+        project: 'diffusion-models',
+        projectLabel: 'Diffusion Image Generation'
+      },
+      {
+        id: 'agents',
+        track: 'gen',
+        title: 'AI Agents & Tool Use',
+        desc: 'Building autonomous AI agents with function calling, tool use, memory, and multi-agent orchestration.',
+        tags: ['LangGraph', 'AutoGen', 'Function Calling', 'Tool Use'],
+        project: 'ai-agents',
+        projectLabel: 'AI Agents Project'
+      }
+    ]
+  },
+  {
+    phase: 6,
+    label: 'Production',
+    title: 'MLOps & Deployment',
+    nodes: [
+      {
+        id: 'mlops',
+        track: 'ml',
+        title: 'MLOps & Model Serving',
+        desc: 'CI/CD for ML, experiment tracking with MLflow, model versioning, FastAPI serving, and containerization.',
+        tags: ['MLflow', 'FastAPI', 'Docker', 'CI/CD'],
+        project: 'mlops-pipeline',
+        projectLabel: 'MLOps End-to-End Pipeline'
+      },
+      {
+        id: 'cloud-ml',
+        track: 'ml',
+        title: 'Cloud ML Platforms',
+        desc: 'Training and deploying models on AWS SageMaker, Google Vertex AI, and Azure ML with managed endpoints.',
+        tags: ['SageMaker', 'Vertex AI', 'Azure ML', 'Kubernetes'],
+        project: 'cloud-ml',
+        projectLabel: 'Cloud Deployment Projects'
+      },
+      {
+        id: 'peft',
+        track: 'gen',
+        title: 'Efficient Fine-tuning (PEFT)',
+        desc: 'LoRA, QLoRA, and adapter methods for memory-efficient LLM fine-tuning on consumer hardware.',
+        tags: ['LoRA', 'QLoRA', 'Quantization', 'PEFT'],
+        project: 'peft-finetuning',
+        projectLabel: 'LoRA Fine-tuning Projects'
+      },
+      {
+        id: 'cv-production',
+        track: 'cv',
+        title: 'CV Model Deployment',
+        desc: 'ONNX export, TensorRT optimization, edge deployment with OpenVINO, and real-time inference pipelines.',
+        tags: ['ONNX', 'TensorRT', 'OpenVINO', 'Edge AI'],
+        project: 'cv-deployment',
+        projectLabel: 'CV Production Pipeline'
+      }
+    ]
+  }
+];
+
+// ── RENDER ──────────────────────────────────────────────────────
+function renderRoadmap(filterTrack = 'all') {
+  const main = document.getElementById('roadmapMain');
+  main.innerHTML = '';
+
+  roadmap.forEach((phase, idx) => {
+    const phaseEl = document.createElement('div');
+    phaseEl.className = 'phase';
+    phaseEl.style.animationDelay = (idx * 0.1) + 's';
+
+    const filteredNodes = filterTrack === 'all'
+      ? phase.nodes
+      : phase.nodes.filter(n => n.track === filterTrack);
+
+    if (filteredNodes.length === 0) return;
+
+    phaseEl.innerHTML = `
+      <div class="phase-header">
+        <div class="phase-num">${String(phase.phase).padStart(2,'0')}</div>
+        <div class="phase-title-wrap">
+          <div class="phase-label">${phase.label}</div>
+          <div class="phase-title">${phase.title}</div>
+        </div>
+      </div>
+      <div class="node-grid">
+        ${filteredNodes.map(node => `
+          <div class="node" data-track="${node.track}" data-id="${node.id}" tabindex="0" role="button"
+               aria-label="${node.title}">
+            <div class="node-track-dot"></div>
+            <div class="node-title">${node.title}</div>
+            <div class="node-desc">${node.desc}</div>
+            <div class="node-tags">
+              ${node.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <div class="node-project">
+              <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+              ${node.projectLabel}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+
+    main.appendChild(phaseEl);
+  });
+
+  // Attach click events
+  document.querySelectorAll('.node').forEach(el => {
+    el.addEventListener('click', () => openModal(el.dataset.id));
+    el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(el.dataset.id); });
+  });
+
+  // Intersection observer for reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.phase').forEach(el => observer.observe(el));
+}
+
+// ── MODAL ────────────────────────────────────────────────────────
+function openModal(nodeId) {
+  let nodeData = null;
+  let phaseData = null;
+  for (const phase of roadmap) {
+    const found = phase.nodes.find(n => n.id === nodeId);
+    if (found) { nodeData = found; phaseData = phase; break; }
+  }
+  if (!nodeData) return;
+
+  const color = trackColors[nodeData.track];
+  document.getElementById('modalTrack').textContent = trackLabels[nodeData.track];
+  document.getElementById('modalTrack').style.color = color;
+  document.getElementById('modalTitle').textContent = nodeData.title;
+  document.getElementById('modalPhase').textContent = `Phase ${phaseData.phase} — ${phaseData.title}`;
+  document.getElementById('modalDesc').textContent = nodeData.desc;
+  document.getElementById('modalTags').innerHTML = nodeData.tags.map(t =>
+    `<span class="modal-tag">${t}</span>`
+  ).join('');
+  document.getElementById('modalProject').href = `${GITHUB}/${nodeData.project}`;
+  document.getElementById('modalProject').querySelector('svg').style.fill = color;
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── TRACK FILTER ─────────────────────────────────────────────────
+document.querySelectorAll('.track-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderRoadmap(btn.dataset.track);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+// ── SCROLL PROGRESS ──────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop / (doc.scrollHeight - doc.clientHeight);
+  document.getElementById('scrollProgress').style.width = (scrolled * 100) + '%';
+});
+
+// ── INIT ─────────────────────────────────────────────────────────
+renderRoadmap('all');
+</script>
+</body>
+</html>
